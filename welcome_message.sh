@@ -19,7 +19,7 @@ if [ ! -f "$FLAGFILE" ]; then
   echo -e "  🚀 Manage Containers: docker ps"
   echo -e "  🌟 Orchestrate Services: docker compose up -d\n\033[0m"
   echo -e "\033[1;35m🔗 GitHub Repository: \033[0m"
-  echo -e "  🌟 Check out our code, report issues or contribute: \033[4mhttps://github.com/brakmic/miniDevOps\033[0m"
+  echo -e "  🌟 Check out our code, report issues or contribute: \033[4mhttps://github.com/waltherB/miniDevOps\033[0m"
   echo -e "\n\033[1;33m⭐ If you find this Docker image helpful, please consider giving us a star on GitHub! ⭐\n\033[0m"
 
   touch $FLAGFILE

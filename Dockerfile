@@ -56,11 +56,21 @@ ENV PATH=/usr/local/go/bin:${PATH}
 # (4) Install Tools
 ###############################################################################
 
+# 40) openShift oc
+ARG OCP_VERSION=4.17.10
+
+RUN curl -LO "https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/latest/openshift-client-linux-${OCP_VERSION}.tar.gz" \
+    && tar -zxvf openshift-client-linux-${OCP_VERSION}.tar.gz oc \
+    && chmod +x oc \
+    && mv oc /usr/local/bin/oc \
+    && mkdir -p ${COMPLETIONS} \
+    && oc completion bash > ${COMPLETIONS}/oc
+
+
 # 4a) kubectl
 RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" \
     && chmod +x kubectl \
     && mv kubectl /usr/local/bin/kubectl \
-    && mkdir -p ${COMPLETIONS} \
     && kubectl completion bash > ${COMPLETIONS}/kubectl
 
 # 4b) kubecolor, stern
@@ -262,6 +272,7 @@ COPY --from=builder /usr/share/bash-completion/completions /usr/share/bash-compl
 COPY .bashrc $HOME/.bashrc
 COPY .bash_completion $HOME/.bash_completion
 COPY .nanorc $HOME/.nanorc
+COPY .vim/ $HOME/.vim
 COPY config.yml $HOME/config.yml
 COPY create_cluster.sh $HOME/create_cluster.sh
 
